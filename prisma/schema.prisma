@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      String   @default("OPERATOR") // OPERATOR, INVESTIGATOR, ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checklistsExecutions ChecklistExecution[]
+  reportedIncidents    Incident[]           @relation("Reporter")
+  investigatedIncidents PostMortem[]         @relation("Investigator")
+}
+
+model ChecklistTemplate {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  items       String   // JSON string storing the items structure
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  executions  ChecklistExecution[]
+}
+
+model ChecklistExecution {
+  id          String   @id @default(cuid())
+  templateId  String
+  operatorId  String
+  status      String   @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+
+  template    ChecklistTemplate @relation(fields: [templateId], references: [id])
+  operator    User              @relation(fields: [operatorId], references: [id])
+}
+
+model Incident {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  severity    String   @default("LOW") // LOW, MEDIUM, HIGH, CRITICAL
+  status      String   @default("REPORTED") // REPORTED, INVESTIGATING, CLOSED
+  reporterId  String
+  reportedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  reporter    User         @relation("Reporter", fields: [reporterId], references: [id])
+  postMortems PostMortem[]
+}
+
+model PostMortem {
+  id             String   @id @default(cuid())
+  incidentId     String
+  investigatorId String
+  fiveWhys       String   // JSON or text
+  rootCause      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  incident       Incident     @relation(fields: [incidentId], references: [id])
+  investigator   User         @relation("Investigator", fields: [investigatorId], references: [id])
+  actionItems    ActionItem[]
+}
+
+model ActionItem {
+  id           String   @id @default(cuid())
+  postMortemId String
+  description  String
+  status       String   @default("PENDING") // PENDING, IMPLEMENTED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  postMortem   PostMortem @relation(fields: [postMortemId], references: [id])
+}
