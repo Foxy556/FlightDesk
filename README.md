@@ -1,49 +1,158 @@
-# FlightDesk ✈️
+<div align="center">
 
-Uma plataforma para gestão de checklists operacionais, acompanhamento de incidentes e investigação de causa raiz sem atribuição de culpa (*Blameless Post-Mortem*).
+# ✈️ FlightDesk
 
-## A Justificativa: Por que a cultura da aviação?
+**Checklists operacionais, gestão de incidentes e post-mortems sem culpa.**
 
-> "Na aviação, a investigação de um erro não busca apontar um culpado, mas sim entender quais falhas no sistema ou no processo permitiram que aquele erro humano acontecesse." — Lito Sousa (Aviões e Músicas)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Se a aviação dependesse apenas da memória ou da infalibilidade dos profissionais, os acidentes seriam constantes. O setor se tornou o meio de transporte mais seguro do mundo porque transformou cada falha e cada 'quase acidente' em aprendizado documentado.
-
-Essa mesma filosofia é perfeitamente aplicável a equipes de tecnologia, saúde, finanças e infraestrutura:
-
-1. **Procedimentos bem padronizados (Checklists)** reduzem o estresse e a margem de erro em tarefas críticas (evitando a complacência).
-2. **Relatórios Pós-Morte Sem Culpa (Post-Mortems)** encorajam a transparência e impedem que o mesmo problema se repita.
-3. **Recomendações Preventivas** transformam falhas passadas em melhorias definitivas de processo (cuidando dos *Near Misses*).
-
----
-
-## Módulos do Sistema (MVP)
-
-### Módulo A: Procedimentos Operacionais (Checklists / Runbooks)
-- **Criador de Templates:** Permite criar checklists estruturados (ex: "Procedimento de Deploy em Produção" ou "Manutenção Preventiva de Servidor").
-- **Itens Críticos x Normais:** Diferenciação entre itens obrigatórios (*Memory Items* / Trava de segurança) e itens de conferência padrão.
-- **Executor de Checklist:** Interface de execução onde o usuário marca passo a passo. O sistema grava automaticamente o horário (timestamp) e o operador responsável por cada marcação.
-
-### Módulo B: Gestão e Investigação de Incidentes
-- **Registro de Incidente/Ocorrência:** Formulário simples para reportar uma falha real ou um "Quase Acidente" (*Near Miss*).
-- **Timeline do Incidente:** Mapeamento em linha do tempo (Ex: 14:00 - Alerta emitido | 14:15 - Causa identificada | 14:40 - Serviço restabelecido).
-- **Análise de Causa Raiz (RCA):** Formulário guiado usando a metodologia dos **5 Porquês** (para descobrir o fator sistêmico e não apenas o sintoma superficial).
-
-### Módulo C: Recomendações de Segurança (Ações Preventivas)
-- **Geração de Action Items:** Vincular tarefas preventivas diretamente ao relatório do incidente.
-- **Acompanhamento de Status:** Painel indicando se as recomendações foram implementadas no sistema/empresa.
-- **Base de Conhecimento Pública (Lições Aprendidas):** Busca para que qualquer pessoa da equipe possa consultar falhas passadas e como foram resolvidas.
+</div>
 
 ---
 
-## Requisitos Não-Funcionais (Qualidade e Arquitetura)
-- **Rastreabilidade:** Todas as alterações em checklists e relatórios de pós-morte devem ter histórico de versão.
-- **Facilidade de Uso (UI Simples):** O foco em momentos de crise deve ser a clareza visual (design limpo e responsivo).
-- **Segurança e Papéis:** Perfis de *Operador* (executa checklists e abre incidentes) e *Investigador/Admin* (conclui o relatório e aprova recomendações).
+## 🇧🇷 Sobre
+
+O FlightDesk nasceu de uma premissa simples: **na aviação, investigar um erro não é procurar
+um culpado — é entender que falha de sistema permitiu aquele erro acontecer.**
+
+Se a aviação dependesse só da memória e da infalibilidade das pessoas, acidentes seriam
+constantes. O setor se tornou o mais seguro do mundo porque transforma cada falha e cada
+"quase acidente" em aprendizado documentado.
+
+Essa filosofia funciona igual em tecnologia, saúde, finanças e infraestrutura:
+
+1. **Checklists padronizados** reduzem o estresse e a margem de erro em tarefas críticas.
+2. **Post-mortems sem culpa** criam transparência e impedem que o mesmo problema se repita.
+3. **Ações preventivas** transformam falhas passadas em melhoria definitiva de processo.
+
+O FlightDesk é a plataforma que materializa esses três pilares.
 
 ---
 
-## Próximos Passos Sugeridos
+## 📦 Módulos
 
-1. **Estrutura de Banco de Dados:** Mapear as entidades (`User`, `Checklist`, `ChecklistExecution`, `Incident`, `PostMortem`, `Recommendation`).
-2. **Definição da Stack:** Escolher as tecnologias. 
-3. **Desenvolvimento:** Iniciar a criação das telas e da API com base no MVP.
+### A — Procedimentos operacionais (Checklists / Runbooks)
+
+- **Templates reutilizáveis** — *"Procedimento de deploy em produção"*, *"Manutenção
+  preventiva de servidor"*, etc.
+- **Itens críticos × normais** — diferencia *memory items* (trava de segurança) de
+  conferências padrão.
+- **Executor de checklist** — marcação passo a passo com registro automático de **timestamp**
+  e do **operador responsável** por cada item.
+
+### B — Incidentes e investigação
+
+- **Registro de ocorrência** — falha real ou *near miss* ("quase acidente").
+- **Linha do tempo** — `14:00 alerta emitido → 14:15 causa identificada → 14:40 serviço
+  restabelecido`.
+- **Análise de causa raiz (RCA)** — formulário guiado pelos **5 Porquês**, indo ao fator
+  sistêmico e não ao sintoma superficial.
+
+### C — Recomendações de segurança
+
+- **Action items** vinculados diretamente ao relatório do incidente.
+- **Painel de status** das recomendações (pendente / em andamento / implementada).
+- **Base de conhecimento** consultável por toda a equipe.
+
+---
+
+## 🏗️ Stack e arquitetura
+
+| Camada | Tecnologia |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, Tailwind CSS 4, Framer Motion, Lucide icons |
+| Linguagem | TypeScript 5 |
+| ORM / Banco | Prisma 7 + SQLite (dev) |
+| Qualidade | ESLint 9, `tsc` |
+
+```
+src/
+├── app/          # rotas e páginas (App Router)
+├── components/   # UI compartilhada
+└── lib/          # utilitários e acesso a dados
+prisma/
+└── schema.prisma # modelo de dados (User, Checklist, Incident, PostMortem…)
+```
+
+### Requisitos não funcionais
+
+- **Rastreabilidade** — histórico de versão de checklists e relatórios.
+- **Clareza em crise** — interface limpa e responsiva, priorizando leitura sob pressão.
+- **Papéis e segurança** — `Operador` (executa checklists e abre incidentes) e
+  `Investigador/Admin` (conclui relatórios e aprova recomendações).
+
+---
+
+## 🚀 Como rodar
+
+```bash
+git clone https://github.com/Foxy556/FlightDesk.git
+cd FlightDesk
+npm install
+
+# cria/atualiza o banco local
+npx prisma db push
+npx prisma generate
+
+npm run dev
+```
+
+Abra [http://localhost:3000](http://localhost:3000).
+
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | servidor de desenvolvimento |
+| `npm run build` | build de produção |
+| `npm run lint` | ESLint |
+| `npx prisma studio` | inspecionar o banco no navegador |
+
+> 💡 **Sem banco para configurar:** o SQLite é criado automaticamente pelo `prisma db push`.
+> O arquivo fica local e fora do versionamento.
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Modelagem de dados e estrutura do projeto
+- [x] CRUD de templates de checklist
+- [x] Executor de checklist com auditoria de execução
+- [ ] Registro de incidentes e *near misses*
+- [ ] Linha do tempo do incidente
+- [ ] Fluxo de RCA com 5 Porquês
+- [ ] Painel de recomendações e base de conhecimento
+- [ ] Autenticação e controle de papéis
+- [ ] Deploy público
+
+---
+
+## 🤝 Contribuição
+
+Issues e pull requests são bem-vindas.
+
+1. Fork o repositório
+2. Crie uma branch: `git checkout -b feat/minha-melhoria`
+3. Commit: `git commit -m "feat: adiciona X"`
+4. Push: `git push origin feat/minha-melhoria`
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença [MIT](LICENSE).
+
+---
+
+<div align="center">
+
+**Veja também:** [net_troubleshoot](https://github.com/Foxy556/net_troubleshoot) ·
+[apontamentos](https://github.com/Foxy556/apontamentos) ·
+[Perfil](https://github.com/Foxy556)
+
+</div>
