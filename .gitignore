@@ -58,3 +58,6 @@ __pycache__/
 .env
 .env.local
 node_modules/
+
+# manter o template versionado
+!.env.example
