@@ -96,6 +96,9 @@ git clone https://github.com/Foxy556/FlightDesk.git
 cd FlightDesk
 npm install
 
+# aponta o Prisma para o banco local
+cp .env.example .env
+
 # cria/atualiza o banco local
 npx prisma db push
 npx prisma generate
@@ -112,8 +115,10 @@ Abra [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | ESLint |
 | `npx prisma studio` | inspecionar o banco no navegador |
 
-> 💡 **Sem banco para configurar:** o SQLite é criado automaticamente pelo `prisma db push`.
-> O arquivo fica local e fora do versionamento.
+> ⚙️ **Configuração:** o Prisma 7 lê a URL do banco de `prisma.config.ts`, que carrega
+> `DATABASE_URL` via `dotenv`. O `.env` é local e está no `.gitignore` — o template fica em
+> [`.env.example`](.env.example). O SQLite (`dev.db`) é criado pelo `prisma db push` e
+> também não é versionado.
 
 ---
 
