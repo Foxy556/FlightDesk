@@ -25,7 +25,19 @@ export default function ChecklistsPage() {
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const res = await fetch("/api/checklists");
+      const data = await res.json();
+      if (cancelled) return;
+      setTemplates(data);
+      setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Tem certeza que deseja remover este checklist?")) return;
